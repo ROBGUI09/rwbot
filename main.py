@@ -69,7 +69,7 @@ async def on_message(message):
             sname="Creative"
             tps=json.loads(requests.get("https://api.reworlds.su/server/metrics?server=2").text)['last_entries']
         else:
-            await message.channel.send("{message.author.mention}, Ты меня тут не путай! Не знаю я такого сервера!")
+            await message.channel.send(f"{message.author.mention}, Ты меня тут не путай! Не знаю я такого сервера!")
         max=json.loads(requests.get("https://api.reworlds.su/server/metrics?server=1").text)['max_online']
         players=json.loads(requests.get("https://map.reworlds.su/tiles/players.json").text)
         online=0
