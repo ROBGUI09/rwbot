@@ -81,7 +81,7 @@ async def on_message(message):
             bc=0xffff00
         elif tps[0]['tps']<10:
             bc=0xff0000
-        embedVar = discord.Embed(title="RevolutionWorlds TPS", description=f"Сервер {sname}, online {online}, Вызвано {message.author.mention}", color=bc)
+        embedVar = discord.Embed(title="RevolutionWorlds TPS", description=f"Сервер {sname}, online {online}, Вызвано {message.author.mention}\n(онлайн) сколько сек назад", color=bc)
         tpsa="{:.2f}".format(tps[0]['tps'])
         embedVar.add_field(name=f"(`{tps[0]['online']}`) `{int(time.time()-tps[0]['time'])}`s", value=f"`{tpsa}`", inline=False)
         tpsb="{:.2f}".format(tps[1]['tps'])
