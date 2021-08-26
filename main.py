@@ -190,9 +190,9 @@ async def on_message(message):
                 return
         x=resp[1].rstrip("\n")
         z=resp[3].rstrip("\n")
-        i={"world":resp[4].rstrip("\n")}
+        i={"world":resp[0].rstrip("\n")}
         try:
-            yaw="{:.2f}".format(i['yaw'])
+            yaw="{:.2f}".format(resp[4])
         except IndexError:
             yaw="???"
         world=''
