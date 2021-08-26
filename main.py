@@ -192,7 +192,7 @@ async def on_message(message):
         z=resp[3].rstrip("\n")
         i={"world":resp[0].rstrip("\n")}
         try:
-            yaw="{:.2f}".format(int(resp[4]))
+            yaw="{:.2f}".format(float(resp[4]))
         except IndexError:
             yaw="???"
         world=''
