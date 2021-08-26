@@ -191,7 +191,10 @@ async def on_message(message):
         world=resp[0].rstrip("\n")
         x=resp[1].rstrip("\n")
         z=resp[3].rstrip("\n")
-        yaw=resp[4].rstrip("\n")
+        try:
+            yaw=resp[4].rstrip("\n")
+        except IndexError:
+            yaw="???"
         name=message.content.split(" ")[1]
         embedVar = discord.Embed(title=f"Данные о {name}", description=f"{fm}Вызвано {message.author.mention}, Координаты игрока:", color=0x00ff00)
         embedVar.add_field(name=f"Мир: `{world}`", value=f"X: `{x}`, Z: `{z}` Yaw: `{yaw}`", inline=False)
