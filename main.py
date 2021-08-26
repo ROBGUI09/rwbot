@@ -81,7 +81,7 @@ async def on_message(message):
             bc=0xffff00
         elif tps[0]['tps']<10:
             bc=0xff0000
-        embedVar = discord.Embed(title="RevolutionWorlds TPS", description=f"Сервер {sname}, online {online}, Вызвано {message.author.mention}\n(онлайн) сколько сек назад", color=bc)
+        embedVar = discord.Embed(title="RevolutionWorlds TPS", description=f"Сервер {sname}, online {online}, Вызвано {message.author.mention}\n(онлайн) сколько сек назад\ntps", color=bc)
         tpsa="{:.2f}".format(tps[0]['tps'])
         embedVar.add_field(name=f"(`{tps[0]['online']}`) `{int(time.time()-tps[0]['time'])}`s", value=f"`{tpsa}`", inline=False)
         tpsb="{:.2f}".format(tps[1]['tps'])
@@ -234,8 +234,7 @@ async def on_message(message):
         embedVar.add_field(name=f".records", value=f"Рекорды сервера*", inline=False)
         embedVar.add_field(name=f".tps 1(выживание)|2(креатив)", value=f"TPS сервера*", inline=False)
         embedVar.set_footer(text="сделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137\n* Подразумевает сервер RewolutionWorlds")
-        await message.author.send(embed=embedVar)
-        await message.channel.send(f"{message.author.mention}, Отправил в лс")
+        await message.channel.send(embed=embedVar)
 client.loop.create_task(radcord(client))
 client.run('ODc5NzgxNjgzOTA0MjYyMjA1.YSUuig.aq9yOxW0vu_LYHGbqBE5ptg-8xI')
 
