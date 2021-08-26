@@ -153,6 +153,9 @@ async def on_message(message):
                 pls=''
         await message.channel.send(pls)
     if message.content.startswith(".player"):
+        fm=''
+        if message.content.split(" ")[1]=="robert300" or message.content.split(" ")[1]=="robert300_AFK" or message.content.split(" ")[1]=="robert300_AFK2":
+            fm="не тычьте в моего хозяина пазезе\n"
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json").text)
         tpl={}
         for player in resp['players']:
@@ -165,12 +168,15 @@ async def on_message(message):
             embedVar.set_footer(text="ДОНАТЕРЫ МОГУТ СКРЫТЬСЯ\nбывают баги с тем что простые игроки тоже не видны\nсделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137")
             await message.channel.send(embed=embedVar)
             return
-        embedVar = discord.Embed(title=f"Данные о {tpl['name']}", description=f"Координаты игрока:", color=0x00ff00)
+        embedVar = discord.Embed(title=f"Данные о {tpl['name']}", description=f"{fm}Координаты игрока:", color=0x00ff00)
         embedVar.add_field(name=f"Мир: `{tpl['world']}`", value=f"X: `{tpl['x']}`, Z: `{tpl['z']}` Yaw: `{tpl['yaw']}`", inline=False)
         embedVar.set_thumbnail(url="https://raw.githubusercontent.com/ROBGUI09/ROBGUI09/main/b534c131aa930c76dc6d6fc4c41145b6.webp")
         embedVar.set_footer(text="сделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137")
         await message.channel.send(embed=embedVar)
     if message.content.startswith(".oplayer"):
+        fm=''
+        if message.content.split(" ")[1]=="robert300" or message.content.split(" ")[1]=="robert300_AFK" or message.content.split(" ")[1]=="robert300_AFK2":
+            fm="не тычьте в моего хозяина пазезе\n"
         msg=message.content.split(" ")
         try:
             resp=open(f"oplayers/{msg[1]}.dat","r").readlines()
@@ -187,7 +193,7 @@ async def on_message(message):
         z=resp[3].rstrip("\n")
         yaw=resp[4].rstrip("\n")
         name=message.content.split(" ")[1]
-        embedVar = discord.Embed(title=f"Данные о {name}", description=f"Вызвано {message.author.mention}, Координаты игрока:", color=0x00ff00)
+        embedVar = discord.Embed(title=f"Данные о {name}", description=f"{fm}Вызвано {message.author.mention}, Координаты игрока:", color=0x00ff00)
         embedVar.add_field(name=f"Мир: `{world}`", value=f"X: `{x}`, Z: `{z}` Yaw: `{yaw}`", inline=False)
         embedVar.set_thumbnail(url="https://raw.githubusercontent.com/ROBGUI09/ROBGUI09/main/b534c131aa930c76dc6d6fc4c41145b6.webp")
         embedVar.set_footer(text="сделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137")
