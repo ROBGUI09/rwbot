@@ -188,16 +188,36 @@ async def on_message(message):
             if player['name']==message.content.split(" ")[1]:
                 await message.channel.send("Игрок онлайн!")
                 return
-        world=resp[0].rstrip("\n")
         x=resp[1].rstrip("\n")
         z=resp[3].rstrip("\n")
+        i={"world":res;[3].rstrip("\n")}
         try:
-            yaw=resp[4].rstrip("\n")
+            yaw="{:.2f}".format(i['yaw'])
         except IndexError:
             yaw="???"
+        world=''
+        if i['world']=="world":
+            if x in range(-100,100) and z in range(-100,100):
+                world="<:spawn:880149491016138812>"
+            else:
+                world="<:world:879849723618549831>"
+        if i['world']=="world_nether":
+            if x in range(-100,100) and z in range(-100,100):
+                world="<:nether_hub:880142881225080912>"
+            elif x>100 and z in range(-4,4):
+                world="<:black:880157605492838450>"
+            else:
+                world="<:world_nether:879849392415342612>"
+            if i['world']==="world_the_end":
+                if x in range(-150,150) and z in range(-150,150):
+                    world="<:end_main:880144288837664859>"
+                elif x in range(1100-150,1100+150) and z in range(100-150,100+150):
+                    world="<:tf:88014306499841941>"
+                else:
+                    world="<:world_the_end:879849539291471872>"            
         name=message.content.split(" ")[1]
         embedVar = discord.Embed(title=f"Данные о {name}", description=f"{fm}Вызвано {message.author.mention}, Координаты игрока:", color=0x00ff00)
-        embedVar.add_field(name=f"Мир: `{world}`", value=f"X: `{x}`, Z: `{z}` Yaw: `{yaw}`", inline=False)
+        embedVar.add_field(name=f"Мир: {world}", value=f"X: `{x}`, Z: `{z}` Yaw: `{yaw}`", inline=False)
         embedVar.set_thumbnail(url="https://raw.githubusercontent.com/ROBGUI09/ROBGUI09/main/b534c131aa930c76dc6d6fc4c41145b6.webp")
         embedVar.set_footer(text="сделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137")
         await message.channel.send(embed=embedVar)
