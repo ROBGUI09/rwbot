@@ -208,7 +208,7 @@ async def on_message(message):
                 world="<:black:880157605492838450>"
             else:
                 world="<:world_nether:879849392415342612>"
-            if i['world']==="world_the_end":
+            if i['world']=="world_the_end":
                 if x in range(-150,150) and z in range(-150,150):
                     world="<:end_main:880144288837664859>"
                 elif x in range(1100-150,1100+150) and z in range(100-150,100+150):
