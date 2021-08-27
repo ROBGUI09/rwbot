@@ -39,7 +39,7 @@ def radd(client,radius, resp):
 
 async def radcord(client):
     await client.wait_until_ready()
-    radius=client.get_channel(880006571294351360)
+    radius=client.get_user(458999331513696256)
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json",timeout=5).text)
     except:
@@ -48,6 +48,7 @@ async def radcord(client):
     mess=radd(client, radius, resp)
     if mess!=None:
         await radius.send(mess)
+    
     await asyncio.sleep(1)
 
 
