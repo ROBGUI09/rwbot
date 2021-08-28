@@ -61,7 +61,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
         if plr['world']!=player['world']:
             continue
         text=player['name']
-        mark=marker.rotate(player['yaw']
+        mark=marker.rotate(player['yaw'])
         pcx=player['x']-cx*512
         pcz=player['z']-cz*512
         draw.text((pcx+10-1, pcz-1), text, font=font, fill=shadowcolor)
