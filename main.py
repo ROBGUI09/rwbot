@@ -72,7 +72,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     table=['a','b','c','d','e','f','g','h','i','g','k','l','m','n','o','p','q','r','a','t','u','v','w','x','y','z']
     name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
     img.save(f"tmp/{cx}_{cz}_{world}_edited.png", "PNG")
-    return {"err":False,"text":"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":f"tmp/{cx}_{cz}_{world}_edited.png"}
+    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":f"tmp/{cx}_{cz}_{world}_edited.png"}
 def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
