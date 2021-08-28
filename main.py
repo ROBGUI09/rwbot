@@ -73,7 +73,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
     fp = TemporaryFile()
     img.save(fp, "PNG")
-    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":fp}
+    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":'tmp/{cx}_{cz}_{world}.png')}
 def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
@@ -295,7 +295,7 @@ async def on_message(message):
         elif "online" in data:
             await message.channek.send("чел офлайн но мне лень щас это фсе оформлять")
         else:
-            await message.channel.send(content=data['text'],file=data['file'])
+            await message.channel.send(content=data['text'],file=open(data['file'],"r"))
         
 client.loop.create_task(radcord(client))
 client.run('ODc5NzgxNjgzOTA0MjYyMjA1.YSUuig.aq9yOxW0vu_LYHGbqBE5ptg-8xI')
