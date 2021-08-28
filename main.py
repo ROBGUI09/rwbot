@@ -1,6 +1,14 @@
 from mcstatus import MinecraftServer
 import discord
 import requests,json,time,asyncio
+from math import floor,modf
+import math
+from datetime import datetime
+import os,random
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+import urllib.request
 client = discord.Client()
 inr=[]
 tfcoords=[1100,100]
@@ -36,6 +44,56 @@ def radd(client,radius, resp):
                 return
             inr.append(player['name'])
             return f"`{player['name']}` в вашем радиусе"
+
+def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
+    tmp=f"{cx}_{cz}"
+    try:
+        urllib.request.urlretrieve(link,f"tmp/{tmp}_{world}.png")
+    except:
+        return {"err":"true","code":"TILE_RETREVIVE"}
+    marker = Image.open("marker.png")
+    marker=marker.rotate(yaw)
+    img = Image.open(f"tmp/{tmp}_{world}.png")
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype("Minecraft.otf", 10)
+    shadowcolor="black"
+    for player in players:
+        if plr['world']!=player['world']:
+            continue
+        text=player['name']
+        mark=marker.rotate(player['yaw'])
+        pcx=player['x']-cx*512
+        pcz=player['z']-cz*512
+        draw.text((pcx+10-1, pcz-1), text, font=font, fill=shadowcolor)
+        draw.text((pcx+10+1, pcz-1), text, font=font, fill=shadowcolor)
+        draw.text((pcx+10, pcz-1-1), text, font=font, fill=shadowcolor)
+        draw.text((pcx+10, pcz+1-1), text, font=font, fill=shadowcolor)
+        draw.text((pcx+10, pcz-1),text,font=font,fill="white")
+        img.paste(marker,(pcx,pcz),mark)
+    table=['a','b','c','d','e','f','g','h','i','g','k','l','m','n','o','p','q','r','a','t','u','v','w','x','y','z']
+    name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
+    img.save(f"{name}.png")
+    open(f"{name.png}","r")
+    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":pix}
+    os.system(f"del {name}.png")
+
+async def getmap(message):
+    try:
+        resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
+    except:
+        return {"err":True,"code":"RESP_ERR"}
+    for player in resp['players']:
+        if player['name']==message.content.split(" ")[1]:
+            chunkx=floor(player['x']/512)
+            chunkz=floor(player['z']/512)
+            yaw=player['yaw']
+            pcx=player['x']-chunkx*512
+            pcz=player['z']-chunkz*512
+            link=f"https://map.reworlds.su/tiles/{player['world']}/3/{chunkx}_{chunkz}.png"
+            try:
+                return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
+            except:
+                return {"err":True,"code":"PILLOW_ERR"}
 
 async def radcord(client):
     await client.wait_until_ready()
@@ -236,6 +294,13 @@ async def on_message(message):
         embedVar.add_field(name=f".tps 1(выживание)|2(креатив)", value=f"TPS сервера*", inline=False)
         embedVar.set_footer(text="сделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137\n* Подразумевает сервер RewolutionWorlds")
         await message.channel.send(embed=embedVar)
+    if message.content.startswith(".map"):
+        data=getmap(message)
+        if data['err']:
+            await message.channel.send(f"Ошибка! Код ошибки:`{data['code']}`. Сообщите об этом ROBGUI#3137")
+        else:
+            await message.channel.send(content=data['text'],file=data['file'])
+        
 client.loop.create_task(radcord(client))
 client.run('ODc5NzgxNjgzOTA0MjYyMjA1.YSUuig.aq9yOxW0vu_LYHGbqBE5ptg-8xI')
 
