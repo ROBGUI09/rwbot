@@ -46,11 +46,12 @@ def radd(client,radius, resp):
             return f"`{player['name']}` в вашем радиусе"
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    tmp=f"{cx}_{cz}"
+    if plr==None:
+        return {"err":"true","offline":True}
     try:
-        urllib.request.urlretrieve(link,f"tmp/{tmp}_{world}.png")
+        urllib.request.urlretrieve(link,f"tmp/{cx}_{cz}_{world}.png")
     except:
-        return {"err":"true","code":"TILE_RETREVIVE"}
+        return {"err":True,"code":"TILE_RETREVIVE"}
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
     img = Image.open(f"tmp/{tmp}_{world}.png")
@@ -298,6 +299,8 @@ async def on_message(message):
         data=getmap(message)
         if data['err']:
             await message.channel.send(f"Ошибка! Код ошибки:`{data['code']}`. Сообщите об этом ROBGUI#3137")
+        elif data['offline']:
+            await message.channek.send("ищу приведений игроков")
         else:
             await message.channel.send(content=data['text'],file=data['file'])
         
