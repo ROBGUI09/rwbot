@@ -292,8 +292,8 @@ async def on_message(message):
         data=getmap(message)
         if data['err']:
             await message.channel.send(f"Ошибка! Код ошибки:`{data['code']}`. Сообщите об этом ROBGUI#3137")
-        elif data['offline']:
-            await message.channek.send("ищу приведений игроков")
+        elif "online" in data:
+            await message.channek.send("чел офлайн но мне лень щас это фсе оформлять")
         else:
             await message.channel.send(content=data['text'],file=data['file'])
         
