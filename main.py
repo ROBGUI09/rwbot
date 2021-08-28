@@ -73,7 +73,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
     fp = TemporaryFile()
     img.save(fp, "PNG")
-    return {"err":False,"text":"`"+plr['name']+"` X: `"+plr['x']+"` Z: `"+plr['z']+"` Yaw: `"+plr['yaw']+"`","file":"tmp/"+str(cx)+"_"+str(cz)+"_"+world+".png"}
+    return {"err":False,"text":"`"+plr['name']+"` X: `"+plr['x']+"` Z: `"+plr['z']+"` Yaw: `"+plr['yaw']+"`","file":f"tmp/{cx}_{cz}_{world}.png"}
 def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
