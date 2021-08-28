@@ -47,10 +47,11 @@ def radd(client,radius, resp):
             return f"`{player['name']}` в вашем радиусе"
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    tfl = bytes()
+    tfl = TemporaryFile()
     if plr==None:
         return {"err":False,"offline":True}
     urllib.request.urlretrieve(link,tfl)
+    tfl.seek(0)
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
     img = Image.open(tfl)
