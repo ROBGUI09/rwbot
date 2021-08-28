@@ -93,8 +93,8 @@ def getmap(message):
             link=f"https://map.reworlds.su/tiles/{player['world']}/3/{chunkx}_{chunkz}.png"
             try:
                 return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
-            except:
-                return {"err":True,"code":"PILLOW_ERR"}
+#            except:
+#                return {"err":True,"code":"PILLOW_ERR"}
 
 async def radcord(client):
     await client.wait_until_ready()
