@@ -47,8 +47,7 @@ def radd(client,radius, resp):
             return f"`{player['name']}` в вашем радиусе"
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    
-    tfl = Tempfile.new(['temp','png'], binmode: true)
+    tfl = TemporaryFile()
     if plr==None:
         return {"err":False,"offline":True}
     urllib.request.urlretrieve(link,tfl)
