@@ -53,7 +53,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     urllib.request.urlretrieve(link,tfl)
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
-    img = Image.open(tfl.encode('utf-8'))
+    img = Image.open(bytearray(tfl))
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("Minecraft.otf", 10)
     shadowcolor="black"
