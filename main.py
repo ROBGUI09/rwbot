@@ -50,7 +50,6 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     if plr==None:
         return {"err":False,"offline":True}
     urllib.request.urlretrieve(link,'tmp/{cx}_{cz}_{world}.png')
-    tfl.seek(0)
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
     img = Image.open('tmp/{cx}_{cz}_{world}.png')
