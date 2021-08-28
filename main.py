@@ -49,7 +49,7 @@ def radd(client,radius, resp):
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     if plr==None:
         return {"err":False,"offline":True}
-    urllib.request.urlretrieve(link,'tmp/{cx}_{cz}_{world}.png')
+    urllib.request.urlretrieve(link,f'tmp/{cx}_{cz}_{world}.png')
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
     img = Image.open('tmp/{cx}_{cz}_{world}.png')
@@ -73,7 +73,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
     fp = TemporaryFile()
     img.save(fp, "PNG")
-    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":'tmp/{cx}_{cz}_{world}.png')}
+    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":f'tmp/{cx}_{cz}_{world}.png')}
 def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
