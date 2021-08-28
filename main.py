@@ -1,5 +1,5 @@
 from mcstatus import MinecraftServer
-from tempfile import TemporaryFile
+from tempfile import NamedTemporaryFile
 import discord
 import requests,json,time,asyncio,io
 from math import floor,modf
@@ -47,7 +47,7 @@ def radd(client,radius, resp):
             return f"`{player['name']}` в вашем радиусе"
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    tfl = TemporaryFile()
+    tfl = NamedTemporaryFile()
     if plr==None:
         return {"err":False,"offline":True}
     urllib.request.urlretrieve(link,tfl)
