@@ -1,5 +1,5 @@
 from mcstatus import MinecraftServer
-from tempfile import NamedTemporaryFile
+from tempfile import TemporaryFile
 import discord
 import requests,json,time,asyncio,io
 from math import floor,modf
@@ -47,14 +47,13 @@ def radd(client,radius, resp):
             return f"`{player['name']}` в вашем радиусе"
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    tfl = NamedTemporaryFile()
     if plr==None:
         return {"err":False,"offline":True}
-    urllib.request.urlretrieve(link,tfl)
+    urllib.request.urlretrieve(link,'tmp/{cx}_{cz}_{world}.png')
     tfl.seek(0)
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
-    img = Image.open(tfl)
+    img = Image.open('tmp/{cx}_{cz}_{world}.png')
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("Minecraft.otf", 10)
     shadowcolor="black"
