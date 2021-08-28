@@ -47,14 +47,14 @@ def radd(client,radius, resp):
             return f"`{player['name']}` в вашем радиусе"
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    tfl=io.BytesIO()
+    tfl=bytearray()
     if plr==None:
         return {"err":False,"offline":True}
     urllib.request.urlretrieve(link,tfl)
     tfl.seek(0)
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
-    img = Image.open(tfl.read())
+    img = Image.open(tfl)
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("Minecraft.otf", 10)
     shadowcolor="black"
