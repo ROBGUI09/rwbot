@@ -91,8 +91,8 @@ def getmap(message):
             pcx=player['x']-chunkx*512
             pcz=player['z']-chunkz*512
             link=f"https://map.reworlds.su/tiles/{player['world']}/3/{chunkx}_{chunkz}.png"
-            try:
-                return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
+#            try:
+            return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
 #            except:
 #                return {"err":True,"code":"PILLOW_ERR"}
 
