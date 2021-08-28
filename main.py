@@ -1,4 +1,5 @@
 from mcstatus import MinecraftServer
+from tempfile import TemporaryFile
 import discord
 import requests,json,time,asyncio
 from math import floor,modf
@@ -73,11 +74,9 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
         img.paste(marker,(pcx,pcz),mark)
     table=['a','b','c','d','e','f','g','h','i','g','k','l','m','n','o','p','q','r','a','t','u','v','w','x','y','z']
     name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
-    img.save(f"{name}.png")
-    open(f"{name.png}","r")
-    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":pix}
-    os.system(f"del {name}.png")
-
+    fp = TemporaryFile()
+    img.save(fp, "PNG")
+    return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":fp}
 def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
@@ -91,10 +90,7 @@ def getmap(message):
             pcx=player['x']-chunkx*512
             pcz=player['z']-chunkz*512
             link=f"https://map.reworlds.su/tiles/{player['world']}/3/{chunkx}_{chunkz}.png"
-#            try:
             return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
-#            except:
-#                return {"err":True,"code":"PILLOW_ERR"}
 
 async def radcord(client):
     await client.wait_until_ready()
