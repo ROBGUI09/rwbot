@@ -52,7 +52,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     urllib.request.urlretrieve(link,f'tmp/{cx}_{cz}_{world}.png')
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
-    img = Image.open('tmp/{cx}_{cz}_{world}.png')
+    img = Image.open(f'tmp/{cx}_{cz}_{world}.png')
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("Minecraft.otf", 10)
     shadowcolor="black"
@@ -71,9 +71,8 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
         img.paste(marker,(pcx,pcz),mark)
     table=['a','b','c','d','e','f','g','h','i','g','k','l','m','n','o','p','q','r','a','t','u','v','w','x','y','z']
     name=random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)+random.choice(table)
-    fp = TemporaryFile()
-    img.save(fp, "PNG")
-    return {"err":False,"text":"`"+plr['name']+"` X: `"+plr['x']+"` Z: `"+plr['z']+"` Yaw: `"+plr['yaw']+"`","file":f"tmp/{cx}_{cz}_{world}.png"}
+    img.save(f"tmp/{cx}_{cz}_{world}_edited.png", "PNG")
+    return {"err":False,"text":"`"+plr['name']+"` X: `"+plr['x']+"` Z: `"+plr['z']+"` Yaw: `"+plr['yaw']+"`","file":f"tmp/{cx}_{cz}_{world}_edited.png"}
 def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
