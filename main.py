@@ -294,7 +294,7 @@ async def on_message(message):
         elif "online" in data:
             await message.channek.send("чел офлайн но мне лень щас это фсе оформлять")
         else:
-            await message.channel.send(content=data['text'],file=open(data['file'],"r"))
+            await message.channel.send(content=data['text'],file=discord.File(data['file']))
         
 client.loop.create_task(radcord(client))
 client.run('ODc5NzgxNjgzOTA0MjYyMjA1.YSUuig.aq9yOxW0vu_LYHGbqBE5ptg-8xI')
