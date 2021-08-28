@@ -77,7 +77,7 @@ def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     return {"err":False,"text":f"`{plr['name']}` X: `{plr['x']}` Z: `{plr['z']}` Yaw: `{plr['yaw']}`","file":pix}
     os.system(f"del {name}.png")
 
-async def getmap(message):
+def getmap(message):
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json", timeout=5).text)
     except:
