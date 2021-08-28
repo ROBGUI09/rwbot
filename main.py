@@ -49,11 +49,8 @@ def radd(client,radius, resp):
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     tfl=TemporaryFile()
     if plr==None:
-        return {"err":"true","offline":True}
-    try:
-        urllib.request.urlretrieve(link,tfl)
-    except:
-        return {"err":True,"code":"TILE_RETREVIVE"}
+        return {"err":False,"offline":True}
+    urllib.request.urlretrieve(link,tfl)
     marker = Image.open("marker.png")
     marker=marker.rotate(yaw)
     img = Image.open(tfl)
