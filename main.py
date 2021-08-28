@@ -285,6 +285,7 @@ async def on_message(message):
         embedVar.add_field(name=f".ping (сервер)", value=f"Получить данные о сервере", inline=False)
         embedVar.add_field(name=f".records", value=f"Рекорды сервера*", inline=False)
         embedVar.add_field(name=f".tps 1(выживание)|2(креатив)", value=f"TPS сервера*", inline=False)
+        embedVar.add_field(name=f".map (игрок)", value=f"**НОВИНКА** показать игрока и ближайших к нему игрков на карте сервера*", inline=False)
         embedVar.set_footer(text="сделано на коленке за 3 часа ночи\nбез любви - ROBGUI#3137\n* Подразумевает сервер RewolutionWorlds")
         await message.channel.send(embed=embedVar)
     if message.content.startswith(".map"):
