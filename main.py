@@ -1,3 +1,4 @@
+token="ТОКЕН БОТА"
 from mcstatus import MinecraftServer
 from tempfile import TemporaryFile
 import discord
@@ -18,13 +19,14 @@ def get_updates(resp):
         t=open(f"oplayers/{player['name']}.dat","w")
         t.write(f"{player['world']}\n{player['x']}\nidk\n{player['z']}\n{player['yaw']}")
         t.close()
-
+'''
+Одна из недоделок
 def radd(client,radius, resp):
     global inr
     me={}
 
     for player in resp['players']:
-        if player['name']=="robert300":
+        if player['name']=="#########":
             me=player
             break
     if me=={}:
@@ -45,6 +47,7 @@ def radd(client,radius, resp):
                 return
             inr.append(player['name'])
             return f"`{player['name']}` в вашем радиусе"
+'''
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     if plr==None:
@@ -87,10 +90,11 @@ def getmap(message):
             pcz=player['z']-chunkz*512
             link=f"https://map.reworlds.su/tiles/{player['world']}/3/{chunkx}_{chunkz}.png"
             return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
-
+'''
+Еще одна недоделка
 async def radcord(client):
     await client.wait_until_ready()
-    radius=client.get_user(458999331513696256)
+    radius=client.get_user(######)
     try:
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json",timeout=5).text)
     except:
@@ -101,7 +105,7 @@ async def radcord(client):
         await radius.send(mess)
     
     await asyncio.sleep(1)
-
+'''
 
 @client.event
 async def on_ready():
@@ -297,8 +301,8 @@ async def on_message(message):
         else:
             await message.channel.send(content=data['text'],file=discord.File(data['file']))
         
-client.loop.create_task(radcord(client))
-client.run('ODc5NzgxNjgzOTA0MjYyMjA1.YSUuig.aq9yOxW0vu_LYHGbqBE5ptg-8xI')
+#client.loop.create_task(radcord(client))
+client.run(token)
 
 
 
