@@ -19,6 +19,7 @@ def get_updates(resp):
         t=open(f"oplayers/{player['name']}.dat","w")
         t.write(f"{player['world']}\n{player['x']}\nidk\n{player['z']}\n{player['yaw']}")
         t.close()
+
 '''
 Одна из недоделок
 def radd(client,radius, resp):
@@ -48,6 +49,7 @@ def radd(client,radius, resp):
             inr.append(player['name'])
             return f"`{player['name']}` в вашем радиусе"
 '''
+
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
     if plr==None:
@@ -90,6 +92,7 @@ def getmap(message):
             pcz=player['z']-chunkz*512
             link=f"https://map.reworlds.su/tiles/{player['world']}/3/{chunkx}_{chunkz}.png"
             return sometext(link,yaw,pcx,pcz,chunkx,chunkz,player,player['world'],resp['players'])
+    return
 '''
 Еще одна недоделка
 async def radcord(client):
@@ -211,8 +214,6 @@ async def on_message(message):
         await message.channel.send(pls)
     if message.content.startswith(".player"):
         fm=''
-        if message.content.split(" ")[1]=="robert300" or message.content.split(" ")[1]=="robert300_AFK" or message.content.split(" ")[1]=="robert300_AFK2":
-            fm="не тычьте в моего хозяина пазезе\n"
         resp=json.loads(requests.get("https://map.reworlds.su/tiles/players.json").text)
         tpl={}
         for player in resp['players']:
@@ -232,8 +233,6 @@ async def on_message(message):
         await message.channel.send(embed=embedVar)
     if message.content.startswith(".oplayer"):
         fm=''
-        if message.content.split(" ")[1]=="robert300" or message.content.split(" ")[1]=="robert300_AFK" or message.content.split(" ")[1]=="robert300_AFK2":
-            fm="не тычьте в моего хозяина пазезе\n"
         msg=message.content.split(" ")
         try:
             resp=open(f"oplayers/{msg[1]}.dat","r").readlines()
@@ -296,8 +295,8 @@ async def on_message(message):
         data=getmap(message)
         if data['err']:
             await message.channel.send(f"Ошибка! Код ошибки:`{data['code']}`. Сообщите об этом ROBGUI#3137")
-        elif "online" in data:
-            await message.channek.send("чел офлайн но мне лень щас это фсе оформлять")
+        elif data==None:
+            await message.channel.send("чел офлайн но мне лень щас это фсе оформлять")
         else:
             await message.channel.send(content=data['text'],file=discord.File(data['file']))
         
