@@ -1,8 +1,8 @@
 token="ТОКЕН БОТА"
 from mcstatus import MinecraftServer
 import discord
-import requests,json,time,asyncio,io
-from math import floor,modf
+import requests,json,time,asyncio
+from math import floor
 import math
 from datetime import datetime
 import os,random
