@@ -15,9 +15,8 @@ inr=[]
 tfcoords=[1100,100]
 def get_updates(resp):
     for player in resp['players']:
-        t=open(f"oplayers/{player['name']}.dat","w")
-        t.write(f"{player['world']}\n{player['x']}\nidk\n{player['z']}\n{player['yaw']}")
-        t.close()
+        with open(f"oplayers/{player['name']}.dat","w") as t:
+            t.write(f"{player['world']}\n{player['x']}\nidk\n{player['z']}\n{player['yaw']}")
 
 '''
 Одна из недоделок
@@ -51,7 +50,7 @@ def radd(client,radius, resp):
 
 
 def sometext(link,yaw,pcx,pcz,cx,cz,plr,world,players):
-    if plr==None:
+    if plr is None:
         return {"err":False,"offline":True}
     urllib.request.urlretrieve(link,f'tmp/{cx}_{cz}_{world}.png')
     marker = Image.open("marker.png")
